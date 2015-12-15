@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 
 import com.shell.basemodel.BaseModel;
 import com.shell.common.dao.BaseDao;
-import com.shell.common.exception.DataAccessException;
 import com.shell.common.service.BaseService;
 
 /**
@@ -28,72 +27,72 @@ public abstract class BaseServiceImpl<T extends BaseModel> implements BaseServic
 	}
 
 	@Override
-	public int addBatch(List<T> tList) throws DataAccessException {
+	public int addBatch(List<T> tList) {
 		return this.getDao().addBatch(tList);
 	}
 
 	@Override
-	public int addBatch(T[] tArray) throws DataAccessException {
+	public int addBatch(T[] tArray) {
 		return this.getDao().addBatch(tArray);
 	}
 
 	@Override
-	public int delete(long key) throws DataAccessException {
+	public int delete(long key) {
 		return this.getDao().delete(key);
 	}
 
 	@Override
-	public int deleteBatch(List<Long> keys) throws DataAccessException {
+	public int deleteBatch(List<Long> keys) {
 		return this.getDao().deleteBatch(keys);
 	}
 
 	@Override
-	public int deleteBatch(Long[] keys) throws DataAccessException {
+	public int deleteBatch(Long[] keys) {
 		return this.getDao().deleteBatch(keys);
 	}
 
 	@Override
-	public int update(T t) throws DataAccessException {
+	public int update(T t) {
 		return this.getDao().update(t);
 	}
 
 	@Override
-	public T get(long key) throws DataAccessException {
+	public T get(long key) {
 		return this.getDao().get(key);
 	}
 
 	@Override
-	public List<T> getBatch(List<Long> keys) throws DataAccessException {
+	public List<T> getBatch(List<Long> keys) {
 		return this.getDao().getBatch(keys);
 	}
 
 	@Override
-	public List<T> getBatch(Long[] keys) throws DataAccessException {
+	public List<T> getBatch(Long[] keys) {
 		return this.getDao().getBatch(keys);
 	}
 
 	@Override
-	public int count() throws DataAccessException {
+	public int count() {
 		return this.getDao().count();
 	}
 
 	@Override
-	public <E> List<E> executeSql(String sql, E e) throws DataAccessException {
+	public <E> List<E> executeSql(String sql, E e) {
 		return this.getDao().executeSql(sql, e);
 	}
 
 	@Override
-	public List<Object> queryList(Map<String, Object> params) throws DataAccessException {
+	public List<Object> queryList(Map<String, Object> params) {
 		return this.getDao().queryList(params);
 	}
 
 	@Override
-	public Object queryObject(Map<String, Object> params) throws DataAccessException {
+	public Object queryObject(Map<String, Object> params) {
 		return this.getDao().queryObject(params);
 	}
 
 	@Override
-	public Object executeBySqlId(String sqlId) throws DataAccessException {
+	public Object executeBySqlId(String sqlId) {
 		return this.getDao().executeBySqlId(sqlId);
 	}
 

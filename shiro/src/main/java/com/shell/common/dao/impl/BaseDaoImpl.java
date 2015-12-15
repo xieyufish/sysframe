@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.shell.basemodel.BaseModel;
 import com.shell.common.dao.BaseDao;
-import com.shell.common.exception.DataAccessException;
 
 /**
  * @author shell
@@ -87,11 +86,7 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 		/** 在里面不直接用this.namespace而是要用方法的原因是：
 		 * namespace的取值可能不是对应t的全路径名，可能会被子类重设，所以要用getNamespace方法（多态）
 		 */
-//		try {
-			sqlSession.insert(getNamespace() + ".add", t);
-//		} catch (RuntimeException e) {
-//			throw new DataAccessException("执行" + getNamespace() + "-add()时出错", e);
-//		}
+		sqlSession.insert(getNamespace() + ".add", t);
 		return t.getId();
 	}
 	
@@ -101,12 +96,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 返回插入的数据条数
 	 */
 	@Override
-	public int addBatch(List<T> tList) throws DataAccessException {
-		try {
-			return sqlSession.insert(getNamespace() + ".addBatch", tList);
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-addBatch方法出错", e);
-		}
+	public int addBatch(List<T> tList) {
+		return sqlSession.insert(getNamespace() + ".addBatch", tList);
 	}
 	
 	/**
@@ -116,7 +107,7 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @see addBatch(List<T> tList)
 	 */
 	@Override
-	public int addBatch(T[] tArray) throws DataAccessException {
+	public int addBatch(T[] tArray) {
 		return addBatch(Arrays.asList(tArray));
 	}
 	
@@ -126,12 +117,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 删除记录的条数
 	 */
 	@Override
-	public int delete(long key) throws DataAccessException {
-		try {
-			return sqlSession.delete(getNamespace() + ".delete", key);
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-delete方法出错", e);
-		}
+	public int delete(long key) {
+		return sqlSession.delete(getNamespace() + ".delete", key);
 	}
 	
 	/**
@@ -140,12 +127,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 删除记录的条数
 	 */
 	@Override
-	public int deleteBatch(List<Long> keys) throws DataAccessException {
-		try {
-			return sqlSession.delete(getNamespace() + ".deleteBatch", keys);
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-deleteBatch方法出错", e);
-		}
+	public int deleteBatch(List<Long> keys) {
+		return sqlSession.delete(getNamespace() + ".deleteBatch", keys);
 	}
 	
 	/**
@@ -154,7 +137,7 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 删除记录的条数
 	 */
 	@Override
-	public int deleteBatch(Long[] keys) throws DataAccessException {
+	public int deleteBatch(Long[] keys) {
 		return deleteBatch(Arrays.asList(keys));
 	}
 	
@@ -164,12 +147,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 更新记录的条数
 	 */
 	@Override
-	public int update(T t) throws DataAccessException {
-		try {
-			return sqlSession.update(getNamespace() + ".update", t);
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-update()方法出错", e);
-		}
+	public int update(T t) {
+		return sqlSession.update(getNamespace() + ".update", t);
 	}
 	
 	/**
@@ -178,12 +157,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 对象集合
 	 */
 	@Override
-	public T get(long key) throws DataAccessException {
-		try {
-			return sqlSession.selectOne(getNamespace() + ".get", getClazz());
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-get()方法出错", e);
-		}
+	public T get(long key) {
+		return sqlSession.selectOne(getNamespace() + ".get", getClazz());
 	}
 	
 	/**
@@ -192,12 +167,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 对象集合
 	 */
 	@Override
-	public List<T> getBatch(List<Long> keys) throws DataAccessException {
-		try {
-			return sqlSession.selectList(getNamespace() + ".getBatch", getClazz());
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-getBatch()方法出错", e);
-		}
+	public List<T> getBatch(List<Long> keys) {
+		return sqlSession.selectList(getNamespace() + ".getBatch", getClazz());
 	}
 	
 	/**
@@ -206,7 +177,7 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 对象集合
 	 */
 	@Override
-	public List<T> getBatch(Long[] keys) throws DataAccessException {
+	public List<T> getBatch(Long[] keys) {
 		return getBatch(Arrays.asList(keys));
 	}
 	
@@ -215,12 +186,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 返回记录总数
 	 */
 	@Override
-	public int count() throws DataAccessException {
-		try {
-			return sqlSession.selectOne(getNamespace() + ".count");
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-count()方法出错", e);
-		}
+	public int count() {
+		return sqlSession.selectOne(getNamespace() + ".count");
 	}
 	
 	/**
@@ -230,12 +197,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 返回集合
 	 */
 	@Override
-	public <E> List<E> executeSql(String sql, E e) throws DataAccessException {
-		try {
-			return sqlSession.selectList(getNamespace() + ".executeSql", e);
-		} catch (RuntimeException e1) {
-			throw new DataAccessException("执行" + getNamespace() + "-executeSql()方法出错", e1);
-		}
+	public <E> List<E> executeSql(String sql, E e) {
+		return sqlSession.selectList(getNamespace() + ".executeSql", e);
 	}
 	
 	/**
@@ -244,12 +207,8 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 返回list集合
 	 */
 	@Override
-	public List<Object> queryList(Map<String, Object> params) throws DataAccessException {
-		try {
-			return sqlSession.selectList(getNamespace() + "." + params.get("sqlId"), params);
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-queryList()方法出错", e);
-		}
+	public List<Object> queryList(Map<String, Object> params) {
+		return sqlSession.selectList(getNamespace() + "." + params.get("sqlId"), params);
 	}
 	
 	/**
@@ -258,20 +217,12 @@ public class BaseDaoImpl<T extends BaseModel> implements BaseDao<T> {
 	 * @return 返回object
 	 */
 	@Override
-	public Object queryObject(Map<String, Object> params) throws DataAccessException {
-		try {
-			return sqlSession.selectOne(getNamespace() + "." + params.get("sqlId"), params);
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-queryObject()方法出错", e);
-		}
+	public Object queryObject(Map<String, Object> params) {
+		return sqlSession.selectOne(getNamespace() + "." + params.get("sqlId"), params);
 	}
 
 	@Override
-	public Object executeBySqlId(String sqlId) throws DataAccessException {
-		try {
-			return sqlSession.selectList(getNamespace() + "." + sqlId);
-		} catch (RuntimeException e) {
-			throw new DataAccessException("执行" + getNamespace() + "-executeBySqlId()方法出错", e);
-		}
+	public Object executeBySqlId(String sqlId) {
+		return sqlSession.selectList(getNamespace() + "." + sqlId);
 	}
 }

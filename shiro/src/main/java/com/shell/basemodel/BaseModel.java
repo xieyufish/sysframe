@@ -18,6 +18,21 @@ public class BaseModel implements Serializable {
 	private long createTime;
 	private long lastModifyTime;
 	private int status;
+	private float tt;
+
+	/**
+	 * @return the tt
+	 */
+	public float getTt() {
+		return tt;
+	}
+
+	/**
+	 * @param tt the tt to set
+	 */
+	public void setTt(float tt) {
+		this.tt = tt;
+	}
 
 	public long getLastModifyTime() {
 		return lastModifyTime;

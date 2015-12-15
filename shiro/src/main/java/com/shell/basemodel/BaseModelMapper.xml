@@ -8,6 +8,6 @@
 	</select>
 	
 	<insert id="add">
-		insert into tes(`test`) values(#{id});
+		insert into test(`test`) values(#{tt});
 	</insert>
 </mapper>

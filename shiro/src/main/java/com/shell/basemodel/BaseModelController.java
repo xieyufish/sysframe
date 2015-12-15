@@ -31,6 +31,7 @@ public class BaseModelController extends BaseController {
 		System.out.println(request.getParameter("name"));
 		BaseModel t = new BaseModel();
 		t.setId(2334l);
+		t.setTt(34.53456145352548f);
 //		service.test();
 		Object obj = service.add(t);
 		ResultObject resultObject = new ResultObject();
